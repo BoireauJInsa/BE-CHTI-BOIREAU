@@ -1,0 +1,216 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 PRESERVE8
+    2 00000000                 THUMB
+    3 00000000         
+    4 00000000                 import           Son
+    5 00000000                 import           LongueurSon
+    6 00000000         
+    7 00000000         
+    8 00000000         ; ====================== zone de réservation de données,
+                         ======================================
+    9 00000000         ;Section RAM (read only) :
+   10 00000000                 area             mesdata,data,readonly
+   11 00000000         
+   12 00000000         
+   13 00000000         ;Section RAM (read write):
+   14 00000000                 area             maram,data,readwrite
+   15 00000000         
+   16 00000000 00 00   SortieSon
+                               dcw              0
+   17 00000002 00 00 00000000 
+                       Position
+                               dcd              0
+   18 00000008         
+   19 00000008                 export           SortieSon
+   20 00000008         ; ======================================================
+                       =========================================
+   21 00000008         
+   22 00000008         
+   23 00000008         
+   24 00000008         
+   25 00000008         ;Section ROM code (read only) :  
+   26 00000008                 area             moncode,code,readonly
+   27 00000000         ; écrire le code ici  
+   28 00000000         
+   29 00000000         timer_callback
+                               FUNCTION
+   30 00000000                 export           timer_callback
+   31 00000000 B500            push             {lr}
+   32 00000002         
+   33 00000002 490E            ldr              r1,=LongueurSon ;adresse de Lon
+                                                            geurSon dans R1
+   34 00000004 4A0E            ldr              r2,=Position ;adresse de Positi
+                                                            on dans R2
+   35 00000006 680B            ldr              r3,[r1]     ;valeur de LongeurS
+                                                            on dans R3
+   36 00000008 6811            ldr              r1,[r2]     ;valeur de Position
+                                                             dans R1
+   37 0000000A 4299            cmp              r1,r3
+   38 0000000C DA13            bge              exit
+   39 0000000E         
+   40 0000000E         
+   41 0000000E         
+   42 0000000E         
+   43 0000000E 480D            ldr              r0,=Son
+   44 00000010         
+   45 00000010 F930 3011       ldrsh            r3, [r0,r1,lsl #1] ; r3 = r0(Ad
+                                                            resse son)[r1(valeu
+                                                            r position)]
+   46 00000014         
+   47 00000014 F101 0101       add              r1, r1, #1  ; increment positio
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            n
+   48 00000018 6011            str              r1, [r2]    ; maj position
+   49 0000001A         ; 2**15 = 32768
+   50 0000001A         
+   51 0000001A F44F 72B4       mov              r2, #360
+   52 0000001E 4618            mov              r0,r3       ; valeur de son[pos
+                                                            ition] dans r0 (dev
+                                                            iendra SortieSon)
+   53 00000020 FB00 F002       mul              r0, r0, r2  ;SortieSon = Sortie
+                                                            Son * 360
+   54 00000024 EA4F 30E0       asr              r0, #15     ;r3 = r3 / 32768, S
+                                                            ortieSon = SortieSo
+                                                            n / 32768
+   55 00000028 F500 70B4       add              r0, r0, #360 ; SortieSon = Sort
+                                                            ieSon + 360
+   56 0000002C         
+   57 0000002C 4906            ldr              r1,=SortieSon
+   58 0000002E 6008            str              r0, [r1]
+   59 00000030         
+   60 00000030 F85D EB04       pop              {lr}
+   61 00000034 4770            bx               lr
+   62 00000036         
+   63 00000036         
+   64 00000036         
+   65 00000036         exit
+   66 00000036 F85D EB04       pop              {lr}
+   67 0000003A 4770            bx               lr
+   68 0000003C         
+   69 0000003C         
+   70 0000003C                 endp
+   71 0000003C         
+   72 0000003C                 END
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -IC:\Program
+data\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Ar
+m\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --p
+redefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 534" --predefi
+ne="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" 
+--list=gestionson.lst Src\GestionSon.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+mesdata 00000000
+
+Symbol: mesdata
+   Definitions
+      At line 10 in file Src\GestionSon.s
+   Uses
+      None
+Comment: mesdata unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Position 00000004
+
+Symbol: Position
+   Definitions
+      At line 17 in file Src\GestionSon.s
+   Uses
+      At line 34 in file Src\GestionSon.s
+Comment: Position used once
+SortieSon 00000000
+
+Symbol: SortieSon
+   Definitions
+      At line 16 in file Src\GestionSon.s
+   Uses
+      At line 19 in file Src\GestionSon.s
+      At line 57 in file Src\GestionSon.s
+
+maram 00000000
+
+Symbol: maram
+   Definitions
+      At line 14 in file Src\GestionSon.s
+   Uses
+      None
+Comment: maram unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+exit 00000036
+
+Symbol: exit
+   Definitions
+      At line 65 in file Src\GestionSon.s
+   Uses
+      At line 38 in file Src\GestionSon.s
+Comment: exit used once
+moncode 00000000
+
+Symbol: moncode
+   Definitions
+      At line 26 in file Src\GestionSon.s
+   Uses
+      None
+Comment: moncode unused
+timer_callback 00000000
+
+Symbol: timer_callback
+   Definitions
+      At line 29 in file Src\GestionSon.s
+   Uses
+      At line 30 in file Src\GestionSon.s
+Comment: timer_callback used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+LongueurSon 00000000
+
+Symbol: LongueurSon
+   Definitions
+      At line 5 in file Src\GestionSon.s
+   Uses
+      At line 33 in file Src\GestionSon.s
+Comment: LongueurSon used once
+Son 00000000
+
+Symbol: Son
+   Definitions
+      At line 4 in file Src\GestionSon.s
+   Uses
+      At line 43 in file Src\GestionSon.s
+Comment: Son used once
+2 symbols
+346 symbols in table
