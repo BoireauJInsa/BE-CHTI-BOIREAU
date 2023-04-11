@@ -3,6 +3,8 @@
 		
 	import Son
 	import LongueurSon
+	include DriverJeuLaser.inc
+		
 	
 
 ;/*
@@ -36,8 +38,9 @@ Position dcd 0
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
-; écrire le code ici		
-	
+; écrire le code ici
+
+
 timer_callback FUNCTION
 	export timer_callback
 	push {lr}
@@ -68,6 +71,7 @@ timer_callback FUNCTION
 
 	ldr r1,=SortieSon
 	str r0, [r1]
+	bl PWM_Set_Value_TIM3_Ch3;
 	
 	pop {lr}
 	bx lr
@@ -76,6 +80,14 @@ timer_callback FUNCTION
 	
 exit
 	pop {lr}
+	bx lr
+	
+Start_Son
+	export Start_Son
+	ldr r2,=Position ;adresse de Position dans R2
+	mov r1, #0
+	str r1,[r2] ;Mise a zero de Position
+	
 	bx lr
 	
 	
