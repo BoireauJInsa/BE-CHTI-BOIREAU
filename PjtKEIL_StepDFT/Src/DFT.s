@@ -1,6 +1,8 @@
 	PRESERVE8
 	THUMB   
-		
+	
+	import LeSignal
+	export DFT_ModuleAuCarre
 
 ; ====================== zone de réservation de données,  ======================================
 ;Section RAM (read only) :
@@ -10,7 +12,9 @@
 ;Section RAM (read write):
 	area    maram,data,readwrite
 		
-
+PartieReelle dcw 0
+PartieImaginaire dcw 0	
+ModuleAuCarre dcw 0
 	
 ; ===============================================================================================
 	
@@ -21,6 +25,66 @@
 	area    moncode,code,readonly
 ; écrire le code ici		
 
+	
+;	fonction DFTRE:k
+;	somme = 0k
+;	for p 0>63:k
+;	cos = tab[p]k
+;	somme = somme + X[p] * cos
+;	
+;	return somme
+	
+DFT_ModuleAuCarre proc
+	push {r4, r5, r6, r7, r8, r9, r10}
+	
+	;r0 -> adresse x(0)
+	;r1 -> k
+	mov r2, #0 ; r2 -> n = 0
+	mov r3, #0 ; r3 -> PartieReelle = 0
+	mov r4, #0 ; r4 -> PartieIm = 0
+	
+	ldr r5,=TabCos	 ; r5 -> adresse tabcos
+	ldr r6,=TabSin	 ; r6 -> adresse tabsin
+	
+	
+	
+LOOP
+	ldrsh r7, [r0, r2, lsl #1] ; r7 = x(n)
+	mul r8, r2, r1 ; r8 = p = n * k
+	and r8, r8, #63
+	
+	ldrsh r9, [r5, r8, lsl #1] ; Tabcos(p)
+	ldrsh r10, [r6, r8, lsl #1] ; Tabsin(p)
+	
+	mul r9, r9, r7
+	add r3,r3,r9 ; maj PartieReelle
+	
+	mul r10, r10, r7
+	add r4,r4,r10 ; maj PartieIm
+	
+	add r2, r2, #1
+	cmp r2, #64 ; si n = 64 then pas loop
+	
+	bne LOOP
+	
+	ldr r5,=PartieReelle
+	str r3, [r5]
+	ldr r6,=PartieImaginaire
+	str r4, [r6]
+	
+	; calcul modulo
+	umull r1,r0,r3,r3
+	umlal r1,r0,r4,r4
+	
+	ldr r7,=ModuleAuCarre
+	str r0, [r7]
+	
+	
+	
+	pop {r4, r5, r6, r7, r8, r9, r10}
+	bx lr
+			
+	endp
 
 
 
@@ -159,8 +223,6 @@ TabSin
 	DCW	-9512	; 61 0xdad8 -0.29028
 	DCW	-6393	; 62 0xe707 -0.19510
 	DCW	-3212	; 63 0xf374 -0.09802
-
-
-		
+	
 		
 	END	
