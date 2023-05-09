@@ -73,8 +73,8 @@ LOOP
 	str r4, [r6]
 	
 	; calcul modulo
-	umull r1,r0,r3,r3
-	umlal r1,r0,r4,r4
+	smull r1,r0,r3,r3
+	smlal r1,r0,r4,r4
 	
 	ldr r7,=ModuleAuCarre
 	str r0, [r7]
