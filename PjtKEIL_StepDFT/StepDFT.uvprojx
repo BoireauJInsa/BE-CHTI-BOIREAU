@@ -436,6 +436,21 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>bruitverre.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\bruitverre.asm</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\GestionSon.h</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\GestionSon.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -455,6 +470,26 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.inc</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>New Group</GroupName>
+          <Files>
+            <File>
+              <FileName>Affichage_Valise.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ModuleAffichage\Affichage_Valise.h</FilePath>
+            </File>
+            <File>
+              <FileName>affichage_valise.o</FileName>
+              <FileType>3</FileType>
+              <FilePath>.\ModuleAffichage\affichage_valise.o</FilePath>
             </File>
           </Files>
         </Group>
@@ -796,7 +831,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>STM32F103xB,USE_FULL_LL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Driver</IncludePath>
+              <IncludePath>.\Driver;.\ModuleAffichage</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -814,7 +849,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\Driver</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -855,6 +890,21 @@
               <FileType>2</FileType>
               <FilePath>.\Src\Signal.asm</FilePath>
             </File>
+            <File>
+              <FileName>bruitverre.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\bruitverre.asm</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\GestionSon.h</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\GestionSon.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -874,6 +924,26 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.inc</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>New Group</GroupName>
+          <Files>
+            <File>
+              <FileName>Affichage_Valise.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ModuleAffichage\Affichage_Valise.h</FilePath>
+            </File>
+            <File>
+              <FileName>affichage_valise.o</FileName>
+              <FileType>3</FileType>
+              <FilePath>.\ModuleAffichage\affichage_valise.o</FilePath>
             </File>
           </Files>
         </Group>
@@ -1343,6 +1413,21 @@
               <FileType>2</FileType>
               <FilePath>.\Src\Signal.asm</FilePath>
             </File>
+            <File>
+              <FileName>bruitverre.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\bruitverre.asm</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\GestionSon.h</FilePath>
+            </File>
+            <File>
+              <FileName>GestionSon.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\GestionSon.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1362,6 +1447,26 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.inc</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>New Group</GroupName>
+          <Files>
+            <File>
+              <FileName>Affichage_Valise.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ModuleAffichage\Affichage_Valise.h</FilePath>
+            </File>
+            <File>
+              <FileName>affichage_valise.o</FileName>
+              <FileType>3</FileType>
+              <FilePath>.\ModuleAffichage\affichage_valise.o</FilePath>
             </File>
           </Files>
         </Group>
@@ -1390,7 +1495,7 @@
   <LayerInfo>
     <Layers>
       <Layer>
-        <LayName>&lt;Project Info&gt;</LayName>
+        <LayName>StepDFT</LayName>
         <LayTarg>0</LayTarg>
         <LayPrjMark>1</LayPrjMark>
       </Layer>
